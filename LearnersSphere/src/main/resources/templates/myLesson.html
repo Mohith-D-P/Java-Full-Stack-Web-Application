@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Cources</title>
+</head>
+<body>
+<div>
+<table class="table table-sucess table-striped table-bordered w-50">
+	<thead>
+	<tr>
+		
+		<th scope="col">Lesson Id</th>
+		<th scope="col">Lesson Name</th>
+		<th scope="col">Lesson Description</th>
+		<th scope="col">Lessons link</th>
+		<th scope="col">Course ID</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td th:text="${lesson.lessonId}"></td>
+		<td th:text="${lesson.lessonName}"></td>
+		<td th:text="${lesson.Description}"></td>
+		<td th:text="${lesson.link}"></td>
+		<td th:text="${lesson.course.courseId}"></td>
+	</tr>
+	</tbody>
+</table>
+</div>
+
+
+<div class="container">
+	<iframe width="300" height="300" 
+	  src="https://www.youtube.com/embed/KmwcyKZ32G0"
+	  title="YouTube video player" frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; 
+      encrypted-media; gyroscope; picture-in-picture;
+      web-share" allowfullscreen></iframe>
+</div>
+
+   <div class="container">
+	   <h3>leave Your comment here</h3>
+	  <form action="/addComment" method="post">
+	     <textarea name="comment"></textarea>
+	     <input type="submit" value="Add Comment">
+	  </for>
+	</div>
+	
+	<div class="container">
+		<h3> comments</h3>
+		
+	</div>
+</div>
+</body>
+</html>
