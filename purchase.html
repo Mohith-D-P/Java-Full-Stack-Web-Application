@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Payment Page</title>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+<form id="payment-form" >
+	<h2>Enter The Amount</h2>
+	<input type="text" name="amount" id="amount">
+	<br>
+	<button type="submit" id="pay-button">Pay</button>
+</form>
+
+
+<script>
+	$("#payment-form").on("submit",function(e){
+		e.preventDefault();
+		createOrder();
+	});
+
+
+function createOrder(){
+	var amount=$("#amount").val();
+	$.post("/createOrder",{amount:amount})
+	.done(function(order){
+		order=JSON.parse(order);
+		
+		var options = {
+    "key": "rzp_test_wN0ckVHjh8sObq", // Enter the Key ID generated from the Dashboard
+    "amount":order.amount_due.toString(), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+    "name": "Learners Sphere",
+    "description": "Test Transaction",
+    "image": "https://example.com/your_logo",
+    "order_id": "order_MHfI7m6Tsx2ag8", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "handler": function (response){
+        alert(response.razorpay_payment_id);
+        alert(response.razorpay_order_id);
+        alert(response.razorpay_signature)
+    },
+    "prefill": {
+        "name": "Gaurav Kumar",
+        "email": "gaurav.kumar@example.com",
+        "contact": "9000090000"
+    },
+    "notes": {
+        "address": "Razorpay Corporate Office"
+    },
+    "theme": {
+        "color": "#3399cc"
+    }
+};
+var rzp1 = new Razorpay(options);
+rzp1.on('payment.failed', function (response){
+        alert(response.error.code);
+        alert(response.error.description);
+        alert(response.error.source);
+        alert(response.error.step);
+        alert(response.error.reason);
+        alert(response.error.metadata.order_id);
+        alert(response.error.metadata.payment_id);
+});
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+	})
+}
+</script>
+
+</body>
+</html>

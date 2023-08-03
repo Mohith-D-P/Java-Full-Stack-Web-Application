@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Cources</title>
+
+    <style>
+	   
+   
+    body{
+			background-color: lightgrey;
+		}
+		
+		.table table-sucess table-striped table{
+			background-color: lightgreen;
+		}
+		
+    </style>
+</head>
+<body>
+<div>
+<table class="table table-sucess table-striped table">
+	<thead>
+	<tr>
+		<th scope="col">Course ID</th>
+		<th scope="col">Course Name</th>
+		<th scope="col">Course Price</th>
+		<th scope="col">Lessons</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr th:each="course:${courseList}">
+		<td th:text="${course.courseId}"></td>
+		<td th:text="${course.courseName}"></td>
+		<td th:text="${course.coursePrice}"></td>
+		<td th:text="${course.Lessons}"></td>
+	</tr>
+	</tbody>
+</table>
+</div>
+</body>
+</html>
